@@ -5,16 +5,17 @@ set "envFile=.env"
 set "exampleFile=.env.example"
 
 if exist "%envFile%" (
-    echo Файл "%envFile%" уже существует.
+    echo "%envFile%" exists
+    docker compose up --build
 ) else (
     if exist "%exampleFile%" (
-        echo Файл "%envFile%" не найден. Копирую содержимое из "%exampleFile%"...
+        echo "%envFile%" not found. Copying from "%exampleFile%"...
         copy "%exampleFile%" "%envFile%"
-        echo Файл "%envFile%" успешно создан из "%exampleFile%".
+        echo "%envFile%" created by copying from "%exampleFile%".
+        docker compose up --build
     ) else (
-        echo Ошибка: Файл "%exampleFile%" не найден. Не удалось создать "%envFile%".
+        echo Error: "%exampleFile%" not found.
     )
 )
-docker compose up --build
 
 pause
