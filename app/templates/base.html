@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Получение архива Timus Online Judge</title>
+        {% endif %}
+    </head>
+    <body>
+        <div id="navigation">
+            <a href="{{ url_for('index') }}">Главная страница</a>
+            <a href="{{ url_for('index') }}">Справка [WIP]</a>
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
